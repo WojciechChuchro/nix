@@ -1,5 +1,6 @@
 { self, ... }:
 {
+  nix.enable = false;
   system = {
     primaryUser = "wojciech";
     configurationRevision = self.rev or self.dirtyRev or null;
