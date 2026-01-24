@@ -44,8 +44,6 @@ let g:WhichKeyDesc_leader = "<leader> Leader key"
 "" Key mappings
 "" ========================================================
 
-inoremap jk <Esc>
-
 " Half page down/up with center
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
