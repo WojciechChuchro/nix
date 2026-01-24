@@ -1,0 +1,225 @@
+"" Base Settings
+"" ========================================================
+
+"Keeps 10 lines visible above and below the cursor when scrolling, providing context while navigating.
+set scrolloff=10
+"Displays line numbers on the left side of the editor.
+set linenumber
+"Show the current mode in the status bar
+set showmode
+"Show (partial) command in the status bar
+set showcmd
+"Show line numbers relative to the current line
+set relativenumber
+"Show line numbers. Maps to the editor's local setting in the View | Active Editor menu
+set number
+"Use case sensitive search if any character in the pattern is uppercase
+set smartcase
+"Show where search pattern typed so far matches
+set incsearch
+"Highlight matches with the last search pattern
+set hlsearch
+"When on, prevents beeping on error
+set visualbell
+"Use system clipboard
+set clipboard+=unnamed
+"No use timeout for mapped key sequences
+set notimeout
+let mapleader = " "
+
+"" Plugin Settings
+"" ========================================================
+
+set surround
+set highlightedyank
+set sneak
+set nerdtree
+set which-key
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+
+"" Key mappings
+"" ========================================================
+
+inoremap jk <Esc>
+
+" Half page down/up with center
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Tab navigation
+nnoremap <A-n> :tabnext<CR>
+nnoremap <A-p> :tabprev<CR>
+
+" Pane navigation
+nnoremap <A-h> <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
+
+" Jump between methods
+nnoremap [[ <Action>(MethodUp)
+nnoremap ]] <Action>(MethodDown)
+
+" Easy visual indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Popup navigation
+inoremap <C-j> <Action>(PopupMenu-selectNext)
+inoremap <C-k> <Action>(PopupMenu-selectPrev)
+
+"" Leader commands
+"" ========================================================
+
+" Disable highlight after search
+let g:WhichKeyDesc_delete_highlight_after_search = "<ESC><ESC> Delete highlight after vim search"
+nnoremap <ESC><ESC> :noh<CR>
+
+" Comment lines
+let g:WhichKeyDesc_comment = "<leader>c Comment line"
+map <leader>c <action>(CommentByLineComment)
+
+" Open NERDTree (use q to exit)
+let g:WhichKeyDesc_nerdtree = "<leader>n NERDTree"
+let g:WhichKeyDesc_nerdtree_toggle = "<leader>nt Toggle NERDTree"
+map <leader>nt :NERDTreeToggle<CR>
+let g:WhichKeyDesc_nerdtree_focus = "<leader>nf Focus NERDTree"
+map <leader>nf :NERDTreeFocus<CR>
+let g:WhichKeyDesc_nerdtree_close = "<leader>nc Close NERDTree"
+map <leader>nc :NERDTreeClose<CR>
+let g:WhichKeyDesc_nerdtree_find = "<leader>nq Find current file"
+map <leader>nq :NERDTreeFind<CR>
+let g:WhichKeyDesc_nerdtree_refresh = "<leader>nr Refresh NERDTree"
+map <leader>nr :NERDTreeRefreshRoot<CR>
+
+" Folding
+let g:WhichKeyDesc_fold = "<leader>z Folding"
+let g:WhichKeyDesc_fold_all = "<leader>zc Fold all regions"
+let g:WhichKeyDesc_unfold_all = "<leader>zo Unfold all regions"
+map <leader>zc :action CollapseAllRegions<CR>
+map <leader>zo :action ExpandAllRegions<CR>
+
+" Window splits
+let g:WhichKeyDesc_window = "<leader>w Window splits"
+let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
+let g:WhichKeyDesc_window_split_horizontally = "<leader>wh Split horizontally"
+let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
+let g:WhichKeyDesc_window_split_move_editor = "<leader>wm Move editor to opposite tab group"
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+" Display options
+let g:WhichKeyDesc_display = "<leader>d Display options"
+let g:WhichKeyDesc_zen_mode = "<leader>dz Toggle Zen mode"
+let g:WhichKeyDesc_df_mode = "<leader>dd Toggle Distraction-Free mode"
+let g:WhichKeyDesc_fullscreen = "<leader>df Toggle full screen"
+map <leader>dd <action>(ToggleDistractionFreeMode)
+map <leader>dz <action>(ToggleZenMode)
+map <leader>df <action>(ToggleFullScreen)
+
+" Actions
+let g:WhichKeyDesc_action= "<leader>a Actions"
+let g:WhichKeyDesc_action_context_menu = "<leader>am Open context menu"
+let g:WhichKeyDesc_action_search = "<leader>as Open command modal"
+let g:WhichKeyDesc_action_show_hover_info = "gh Show hover info"
+map <leader>am <action>(ShowIntentionActions)
+map <leader>as <action>(SearchEverywhere)
+nmap gh <Action>(ShowHoverInfo)
+
+" File navigation
+let g:WhichKeyDesc_file_nav = "<leader>s [S]earch"
+let g:WhichKeyDesc_file_nav_goto_file = "<leader>sf [S]earch [F]ile"
+let g:WhichKeyDesc_file_nav_show_recent_files = "<leader>sr [S]earch [R]ecent files"
+let g:WhichKeyDesc_file_quickLook = "<leader><leader> Recent files"
+let g:WhichKeyDesc_file_nav_show_recent_locations = "<leader>sl [S]earch recent [L]ocations"
+let g:WhichKeyDesc_file_find_usages = "<leader>su [S]earch [U]sages"
+let g:WhichKeyDesc_file_search_in_file_path = "<leader>sp [S]earch in [P]ath"
+map <leader>sf <action>(GotoFile)
+map <leader>sr <action>(RecentFiles)
+map <leader><leader> <Action>(RecentFiles)
+nmap <leader>su <Action>(FindUsages)
+map <leader>sl <action>(RecentLocations)
+map <leader>sp <action>(FindInPath)
+
+" ??????
+let g:WhichKeyDesc_file_nav_scratch_file = "<leader>ss Create new scratch file"
+map <leader>ss <action>(NewScratchFile)
+
+" Close active tab
+let g:WhichKeyDesc_close_tab = "<leader>q Close active tab"
+map <leader>q <action>(CloseContent)
+
+" Close all active tabs
+let g:WhichKeyDesc_close_all_tabs = "<leader>Q Close all active tab"
+nnoremap <Leader>Q :action CloseAllEditors<CR>
+
+" Refactoring
+let g:WhichKeyDesc_refactoring = "<leader>r Refactoring menu"
+let g:WhichKeyDesc_refactoring_rename = "<leader>rn Rename element"
+let g:WhichKeyDesc_refactoring_method = "<leader>rm Extract method"
+let g:WhichKeyDesc_refactoring_variable = "<leader>rv Introduce variable"
+let g:WhichKeyDesc_refactoring_field = "<leader>rf Introduce field"
+let g:WhichKeyDesc_refactoring_signature = "<leader>rs Change signature"
+let g:WhichKeyDesc_refactoring_all = "<leader>rr Open refactorings list"
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+
+" Go to code
+let g:WhichKeyDesc_goto = "<leader>g Go to X"
+let g:WhichKeyDesc_goto_declaration = "<leader>gd Go to Definition"
+let g:WhichKeyDesc_goto_type_declaration = "<leader>gy Go to Type Definition"
+let g:WhichKeyDesc_goto_implementation = "<leader>gi Go to Implementation"
+let g:WhichKeyDesc_goto_usages = "<leader>gu Go to Usages"
+let g:WhichKeyDesc_goto_test = "<leader>gt Go to Test"
+let g:WhichKeyDesc_goto_back = "<leader>gb Go Back"
+let g:WhichKeyDesc_goto_forward = "<leader>gf Go Forward"
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>gt <Action>(GotoTest)
+nmap <leader>gf <Action>(Back)
+nmap <leader>gb <Action>(Forward)
+
+" Errors
+let g:WhichKeyDesc_errors = "<leader>e Error navigation"
+let g:WhichKeyDesc_errors_next = "<leader>en Go to next error in solution"
+let g:WhichKeyDesc_errors_prev = "<leader>ep Go to previous error in solution"
+map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
+map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
+
+" Harpoon
+let g:WhichKeyDesc_action_HarpoonerOpenFile0 = "<C-1> Open Harpoon File 1"
+let g:WhichKeyDesc_action_HarpoonerOpenFile1 = "<C-2> Open Harpoon File 2"
+let g:WhichKeyDesc_action_HarpoonerOpenFile2 = "<C-3> Open Harpoon File 3"
+let g:WhichKeyDesc_action_HarpoonerOpenFile3 = "<C-4> Open Harpoon File 4"
+let g:WhichKeyDesc_action_HarpoonerQuickMenu = "<C-e> Open Harpoon Quick Menu"
+let g:WhichKeyDesc_action_Harpooner = "<leader>h Harpooner"
+let g:WhichKeyDesc_action_HarpoonerAddFile = "<leader>ha Add File to Harpoon"
+nmap <C-1> <action>(HarpoonerOpenFile0)
+nmap <C-2> <action>(HarpoonerOpenFile1)
+nmap <C-3> <action>(HarpoonerOpenFile2)
+nmap <C-4> <action>(HarpoonerOpenFile3)
+nmap <C-5> <action>(HarpoonerOpenFile4)
+nmap <C-6> <action>(HarpoonerOpenFile5)
+nmap <C-7> <action>(HarpoonerOpenFile6)
+nmap <C-8> <action>(HarpoonerOpenFile7)
+nmap <C-9> <action>(HarpoonerOpenFile8)
+nmap <C-0> <action>(HarpoonerOpenFile9)
+nmap <C-e> <action>(HarpoonerQuickMenu)
+nmap <leader>ha <action>(HarpoonerAddFile)
+
+" Maximize the editor window and hide side panels
+let g:WhichKeyDesc_maximize_window = "<leader>m Maximize editor window and hide panels"
+map <leader>m :action MaximizeEditorInSplitAction<CR>
+map <leader>m :action HideAllWindows<CR>

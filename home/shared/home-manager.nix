@@ -8,7 +8,7 @@
     useUserPackages = true;
     users.wojciech = {
       imports = [
-        ../modules/nvim.nix
+        ../modules
       ];
 
       home = {
