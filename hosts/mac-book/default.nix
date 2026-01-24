@@ -1,8 +1,7 @@
 { self, ... }:
 {
-  nix.enable = false;
-
   system = {
+    primaryUser = "wojciech";
     configurationRevision = self.rev or self.dirtyRev or null;
     stateVersion = 6;
 
@@ -22,21 +21,8 @@
     };
   };
 
-  homebrew = {
-    enable = true;
-    onActivation.autoUpdate = true;
-    onActivation.cleanup = "zap"; # Removes apps not listed here
-
-    taps = [
-      "homebrew/cask"
-      "homebrew/core"
-    ];
-
-    brews = [ "mas" ]; # Mac App Store CLI
-
-    casks = [
-      "obs"
-      "discord"
-    ];
+  users.users.wojciech = {
+    name = "wojciech";
+    home = "/Users/wojciech"; # optional, nix-darwin usually handles this
   };
 }

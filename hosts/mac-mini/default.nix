@@ -1,10 +1,28 @@
-{ ... }:
+{ self, ... }:
 {
-  imports = [ ../../modules/darwin ];
+  system = {
+    primaryUser = "wojciech";
+    configurationRevision = self.rev or self.dirtyRev or null;
+    stateVersion = 6;
 
-  # Host-specific settings
-  nixpkgs.hostPlatform = "aarch64-darwin";
+    defaults = {
+      dock = {
+        autohide = true;
+        mru-spaces = false;
+      };
+      finder = {
+        ShowPathbar = true;
+        AppleShowAllExtensions = true;
+        CreateDesktop = false;
+        FXPreferredViewStyle = "Flwv";
+      };
+      screencapture.location = "~/Pictures/screenshots";
+      screensaver.askForPasswordDelay = 10;
+    };
+  };
 
-  # You could also put user-specific info here if it changes per machine
-  system.primaryUser = "wojciech";
+  users.users.wojciech = {
+    name = "wojciech";
+    home = "/Users/wojciech"; # optional, nix-darwin usually handles this
+  };
 }

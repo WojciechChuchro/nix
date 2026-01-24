@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./home-manager.nix ];
+
   environment.systemPackages = with pkgs; [
     vim
     statix
@@ -15,4 +17,5 @@
 
   # Set your shell for both systems
   programs.zsh.enable = true;
+
 }
