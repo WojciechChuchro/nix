@@ -1,11 +1,5 @@
 return {
   { "ellisonleao/gruvbox.nvim" },
-  {
-    "folke/snacks.nvim",
-    opts = {
-      scroll = { enabled = false },
-    },
-  },
 
   {
     "LazyVim/LazyVim",
@@ -28,6 +22,15 @@ return {
     opts = {
       servers = {
         pyright = {},
+        nixd = {
+          settings = {
+            nixd = {
+              formatting = {
+                command = { "alejandra" },
+              },
+            },
+          },
+        },
       },
     },
   },
@@ -71,6 +74,7 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "nix",
       },
     },
   },

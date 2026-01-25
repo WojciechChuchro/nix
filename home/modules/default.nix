@@ -1,7 +1,8 @@
-_: {
-  home = {
-    file.".config/ghostty/config" = {
-      source = ../configs/ghostty;
-    };
-  };
+{ ... }:
+{
+  imports = [
+    ./nvim.nix
+    ./ideavimrc.nix
+    ./ghostty.nix
+  ];
 }

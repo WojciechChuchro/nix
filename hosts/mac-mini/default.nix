@@ -1,6 +1,10 @@
 { self, ... }:
 {
   nix.enable = false;
+  nix.settings.trusted-users = [
+    "root"
+    "wojciech"
+  ];
   system = {
     primaryUser = "wojciech";
     configurationRevision = self.rev or self.dirtyRev or null;
@@ -24,6 +28,6 @@
 
   users.users.wojciech = {
     name = "wojciech";
-    home = "/Users/wojciech"; # optional, nix-darwin usually handles this
+    home = "/Users/wojciech";
   };
 }
