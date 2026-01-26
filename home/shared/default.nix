@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  imports = [ ./home-manager.nix ];
+{pkgs, ...}: {
+  imports = [./home-manager.nix];
 
   environment.systemPackages = with pkgs; [
     vim
@@ -12,5 +11,4 @@
 
   nix.settings.experimental-features = "nix-command flakes";
   programs.zsh.enable = true;
-
 }

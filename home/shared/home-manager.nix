@@ -1,12 +1,11 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   imports = [
     inputs.home-manager.darwinModules.home-manager
   ];
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-backupFileExtension = "backup";
+    backupFileExtension = "backup";
     users.wojciech = {
       imports = [
         ../modules

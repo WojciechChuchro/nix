@@ -32,34 +32,31 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nix-darwin,
-      nixpkgs,
-      ...
-    }:
-    {
-      darwinConfigurations = {
-        # darwin-rebuild switch --flake .#mac-mini
-        mac-mini = nix-darwin.lib.darwinSystem {
-          # This passes 'inputs' and 'self' to all your modules automatically
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs self; };
-          modules = [
-            ./home/shared
-            ./hosts/mac-mini
-          ];
-
-        };
-        mac-book = nix-darwin.lib.darwinSystem {
-          # This passes 'inputs' and 'self' to all your modules automatically
-          specialArgs = { inherit inputs self; };
-          modules = [
-            ./home/shared
-            ./hosts/mac-book
-          ];
-        };
+  outputs = inputs @ {
+    self,
+    nix-darwin,
+    nixpkgs,
+    ...
+  }: {
+    darwinConfigurations = {
+      # darwin-rebuild switch --flake .#mac-mini
+      mac-mini = nix-darwin.lib.darwinSystem {
+        # This passes 'inputs' and 'self' to all your modules automatically
+        system = "aarch64-darwin";
+        specialArgs = {inherit inputs self;};
+        modules = [
+          ./home/shared
+          ./hosts/mac-mini
+        ];
+      };
+      mac-book = nix-darwin.lib.darwinSystem {
+        # This passes 'inputs' and 'self' to all your modules automatically
+        specialArgs = {inherit inputs self;};
+        modules = [
+          ./home/shared
+          ./hosts/mac-book
+        ];
       };
     };
+  };
 }
