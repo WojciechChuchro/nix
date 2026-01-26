@@ -30,6 +30,7 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
   };
 
   outputs = inputs @ {
