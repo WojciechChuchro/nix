@@ -36,22 +36,33 @@
   outputs = inputs @ {
     self,
     nix-darwin,
-    nixpkgs,
+    home-manager,
     ...
-  }: {
+  }: let
+    system = "aarch64-darwin";
+    username = "paxters";
+  in {
     darwinConfigurations = {
       # darwin-rebuild switch --flake .#mac-mini
       mac-mini = nix-darwin.lib.darwinSystem {
-        # This passes 'inputs' and 'self' to all your modules automatically
-        system = "aarch64-darwin";
+        inherit system;
         specialArgs = {inherit inputs self;};
         modules = [
-          ./home/shared
           ./hosts/mac-mini
+          ./modules/darwin
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./home;
+            };
+          }
         ];
       };
+
+      # TODO:
       mac-book = nix-darwin.lib.darwinSystem {
-        # This passes 'inputs' and 'self' to all your modules automatically
         specialArgs = {inherit inputs self;};
         modules = [
           ./home/shared
