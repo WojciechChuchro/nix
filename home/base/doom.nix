@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   imports = [inputs.nix-doom-emacs-unstraightened.hmModule];
 
   programs.doom-emacs = {

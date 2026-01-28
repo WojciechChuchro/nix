@@ -1,3 +1,3 @@
 _: {
-  imports = ["./doom.nix" "./ghostty.nix" "./ideavimrc.nix" "./nvim"];
+  imports = [./ghostty.nix ./ideavimrc.nix ./nvim.nix];
 }

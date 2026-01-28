@@ -40,21 +40,23 @@
     ...
   }: let
     system = "aarch64-darwin";
-    username = "paxters";
+    username = "wojciech";
   in {
     darwinConfigurations = {
-      # darwin-rebuild switch --flake .#mac-mini
       mac-mini = nix-darwin.lib.darwinSystem {
         inherit system;
         specialArgs = {inherit inputs self;};
         modules = [
           ./hosts/mac-mini
           ./modules/darwin
+
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = {inherit inputs username;};
+              backupFileExtension = "backup";
               users.${username} = import ./home;
             };
           }
