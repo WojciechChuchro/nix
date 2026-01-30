@@ -1,10 +1,5 @@
-{ self, ... }:
-{
+{self, ...}: {
   nix.enable = false;
-  nix.settings.trusted-users = [
-    "root"
-    "wojciech"
-  ];
   system = {
     primaryUser = "wojciech";
     configurationRevision = self.rev or self.dirtyRev or null;
@@ -24,10 +19,5 @@
       screencapture.location = "~/Pictures/screenshots";
       screensaver.askForPasswordDelay = 10;
     };
-  };
-
-  users.users.wojciech = {
-    name = "wojciech";
-    home = "/Users/wojciech";
   };
 }

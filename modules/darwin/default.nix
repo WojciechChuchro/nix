@@ -1,11 +1,11 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    vim
-    statix
-    deadnix
-    git
-    htop
-  ];
-
-  programs.zsh.enable = true;
+{
+  pkgs,
+  username,
+  ...
+}: {
+  imports = [../base ./homebrew.nix ./configuration.nix];
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
+  };
 }

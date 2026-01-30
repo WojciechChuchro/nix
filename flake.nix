@@ -36,6 +36,7 @@
   outputs = inputs @ {
     self,
     nix-darwin,
+    homebrew,
     home-manager,
     ...
   }: let
@@ -45,7 +46,7 @@
     darwinConfigurations = {
       mac-mini = nix-darwin.lib.darwinSystem {
         inherit system;
-        specialArgs = {inherit inputs self;};
+        specialArgs = {inherit inputs self username;};
         modules = [
           ./hosts/mac-mini
           ./modules/darwin
@@ -60,15 +61,43 @@
               users.${username} = import ./home;
             };
           }
+          homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              user = username;
+              autoMigrate = true;
+            };
+          }
         ];
       };
 
-      # TODO:
       mac-book = nix-darwin.lib.darwinSystem {
-        specialArgs = {inherit inputs self;};
+        specialArgs = {inherit inputs self username;};
+        system = "aarch64-darwin";
         modules = [
-          ./home/shared
           ./hosts/mac-book
+          ./modules/darwin
+
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs username;};
+              backupFileExtension = "backup";
+              users.${username} = import ./home;
+            };
+          }
+
+          homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              user = username;
+              autoMigrate = true;
+            };
+          }
         ];
       };
     };
